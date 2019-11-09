@@ -216,7 +216,7 @@ class SectorFive < Gosu::Window
     )
     @enemies_destroyed_font.draw_text(
       "Destroyed: #{@enemies_destroyed}",
-      560,
+      540,
       10,
       1,
       1,
