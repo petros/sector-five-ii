@@ -16,7 +16,7 @@ class SectorFive < Gosu::Window
     self.caption = 'Sector Five II'
     @background_image = Gosu::Image.new('images/start_screen.png')
     @scene = :start
-    @start_music = Gosu::Song.new('sounds/Lost Frontier.ogg')
+    @start_music = Gosu::Song.new('sounds/lost_frontier.ogg')
     @start_music.play(true)
   end
   
@@ -61,7 +61,7 @@ class SectorFive < Gosu::Window
     @enemies_destroyed_font = Gosu::Font.new(18, bold: true)
     @enemies_escaped_font = Gosu::Font.new(18, bold: true)
     @scene = :game
-    @game_music = Gosu::Song.new('sounds/Cephalopod.ogg')
+    @game_music = Gosu::Song.new('sounds/cephalopod.ogg')
     @game_music.play(true)
     @explosion_sound = Gosu::Sample.new('sounds/explosion.ogg')
     @shooting_sound = Gosu::Sample.new('sounds/shoot.ogg')
@@ -91,7 +91,7 @@ class SectorFive < Gosu::Window
       y += 30
     end
     @scene = :end
-    @end_music = Gosu::Song.new('sounds/FromHere.ogg')
+    @end_music = Gosu::Song.new('sounds/from_here.ogg')
     @end_music.play(true)
   end
   
