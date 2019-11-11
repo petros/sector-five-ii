@@ -1,8 +1,8 @@
 Sector Five II
 ==============
 
-Extended edition of the game, based on a Tutorial from Learn Game Programming
-with Ruby by Mark Sobkowicz.
+Extended edition of the game, based on a tutorial from [Learn Game Programming]
+with Ruby by [Mark Sobkowicz].
 
 You can read the [credits](credits.txt) seperately.
 
@@ -20,9 +20,9 @@ Running or developing on macOS
 ==============================
 
 1. Install the latest Ruby version
-2. brew install sdl2 libogg libvorbis​
-3. gem install gosu
-4. gem install chipmunk
+2. `brew install sdl2 libogg libvorbis`
+3. `gem install gosu`
+4. `gem install chipmunk`
 
 Running or developing on Windows
 ================================
@@ -33,7 +33,7 @@ this game on their system.
 
 Credits
 =======
-The starter base code comes from a tutorial from Learn Game Programming
+The starter base code comes from a tutorial from [Learn Game Programming]
 with Ruby by [Mark Sobkowicz](https://twitter.com/MarkSobkowicz).
 
 You can read the rest of the [credits](credits.txt) seperately. It includes the
@@ -48,3 +48,6 @@ Contributors
 ============
 
 - [petros](https://twitter.com/amiridis) ([petros.blog/games](https://petros.blog/games))
+
+[Learn Game Programming]: https://pragprog.com/book/msgpkids/learn-game-programming-with-ruby
+[Mark Sobkowicz]: https://twitter.com/MarkSobkowicz
