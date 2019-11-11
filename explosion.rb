@@ -1,5 +1,7 @@
-class Explosion
-  attr_reader :x, :y, :radius, :finished
+require_relative 'sprite'
+
+class Explosion < Sprite
+  attr_reader :finished
   
   def initialize(window, x, y)
     @x = x

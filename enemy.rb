@@ -1,6 +1,6 @@
-class Enemy
-  attr_reader :x, :y, :radius
-  
+require_relative 'sprite'
+
+class Enemy < Sprite  
   def initialize(window)
     @radius = 20
     @x = rand(window.width - 2 * @radius) + @radius
