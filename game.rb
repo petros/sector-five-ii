@@ -5,13 +5,13 @@ class Game
   WINDOW_HEIGHT = 600
   ENEMY_FREQUENCY = 0.05
   MAX_ENEMIES = 100
-  
+
   class << self
      attr_accessor :current_scene, :window
   end
 
   def initialize(window)
     Game.current_scene = StartScene.new
-    Game.window = window    
-  end  
+    Game.window = window
+  end
 end

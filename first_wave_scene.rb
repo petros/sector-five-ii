@@ -25,14 +25,14 @@ class FirstWaveScene < Scene
     @shooting_sound = Gosu::Sample.new('sounds/shoot.ogg')
     @teleport_sound = Gosu::Sample.new('sounds/teleport.wav')
   end
-  
+
   def button_down(id)
     if id == Gosu::KbSpace
       @bullets.push Bullet.new(Game.window, @player.x, @player.y, @player.angle)
       @shooting_sound.play(0.3)
     end
   end
-  
+
   def update
     @player.turn_left if Gosu.button_down?(Gosu::KbLeft)
     @player.turn_right if Gosu.button_down?(Gosu::KbRight)
@@ -101,7 +101,7 @@ class FirstWaveScene < Scene
       Game.current_scene = EndOffTopScene.new(@enemies_destroyed)
     end
   end
-  
+
   def draw
     @player.draw
     @enemies.each do |enemy|
@@ -141,5 +141,5 @@ class FirstWaveScene < Scene
       Gosu::Color::RED
     )
   end
-  
+
 end

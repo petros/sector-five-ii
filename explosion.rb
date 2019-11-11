@@ -2,7 +2,7 @@ require_relative 'sprite'
 
 class Explosion < Sprite
   attr_reader :finished
-  
+
   def initialize(window, x, y)
     @x = x
     @y = y
@@ -11,7 +11,7 @@ class Explosion < Sprite
     @image_index = 0
     @finished = false
   end
-  
+
   def draw
     if @image_index < @images.count
       @images[@image_index].draw(@x - @radius, @y - @radius, 2)

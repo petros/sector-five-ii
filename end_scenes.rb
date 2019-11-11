@@ -48,7 +48,7 @@ class EndScene < Scene
     @message_font.draw_text(@message2, 40, 75, 1, 1, 1, Gosu::Color::FUCHSIA)
     Gosu.draw_line(0, 500, Gosu::Color::RED, Game::WINDOW_WIDTH, 500, Gosu::Color::RED)
     @message_font.draw_text(@bottom_message, 180, 540, 1, 1, 1, Gosu::Color::AQUA)
-  end  
+  end
 end
 
 class EndCountReachedScene < EndScene
