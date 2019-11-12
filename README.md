@@ -1,8 +1,8 @@
 Sector Five II
 ==============
 
-Extended edition of the game, based on a tutorial from [Learn Game Programming]
-with Ruby by [Mark Sobkowicz].
+Extended edition of the game, based on a tutorial from
+[Learn Game Programming with Ruby] by [Mark Sobkowicz].
 
 You can read the [credits](credits.txt) seperately.
 
@@ -33,8 +33,9 @@ this game on their system.
 
 Credits
 =======
-The starter base code comes from a tutorial from [Learn Game Programming]
-with Ruby by [Mark Sobkowicz](https://twitter.com/MarkSobkowicz).
+The starter base code comes from a tutorial from
+[Learn Game Programming with Ruby]
+by [Mark Sobkowicz](https://twitter.com/MarkSobkowicz).
 
 You can read the rest of the [credits](credits.txt) seperately. It includes the
 attributions for the sounds and images used in this game.
@@ -55,5 +56,5 @@ Contributors
 
 - [petros](https://twitter.com/amiridis) ([petros.blog/games](https://petros.blog/games))
 
-[Learn Game Programming]: https://pragprog.com/book/msgpkids/learn-game-programming-with-ruby
+[Learn Game Programming with Ruby]: https://pragprog.com/book/msgpkids/learn-game-programming-with-ruby
 [Mark Sobkowicz]: https://twitter.com/MarkSobkowicz
