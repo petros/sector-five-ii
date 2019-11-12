@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require_relative 'sprite'
 
+# Player
 class Player < Sprite
   ROTATION_SPEED = 3
   ACCELERATION = 2
@@ -40,22 +43,35 @@ class Player < Sprite
     @y += @velocity_y
     @velocity_x *= FRICTION
     @velocity_y *= FRICTION
-    if @x > @window.width - @radius
-      @velocity_x = 0
-      @x = @window.width - @radius
-    end
-    if @x < @radius
-      @velocity_x = 0
-      @x = @radius
-    end
-    if @y > @window.height - @radius
-      @velocity_y = 0
-      @y = @window.height - @radius
-    end
+    not_move_beyond_right_boundary
+    not_move_beyond_left_boundary
+    not_move_beyond_bottom_boundary
   end
 
   def off_top?
     y < radius
   end
-end
 
+  private
+
+  def not_move_beyond_right_boundary
+    return unless @x > @window.width - @radius
+
+    @velocity_x = 0
+    @x = @window.width - @radius
+  end
+
+  def not_move_beyond_left_boundary
+    return unless @x < @radius
+
+    @velocity_x = 0
+    @x = @radius
+  end
+
+  def not_move_beyond_bottom_boundary
+    return unless @y > @window.height - @radius
+
+    @velocity_y = 0
+    @y = @window.height - @radius
+  end
+end

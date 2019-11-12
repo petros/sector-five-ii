@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'gosu'
 
+# HorizontalText
 class HorizontalText
-
-  def initialize(x, y)
+  def initialize(x_pos, y_pos)
     @text = []
-    @x = x
-    @y = y
+    @x = x_pos
+    @y = y_pos
     @font = Gosu::Font.new(12, name: 'C64_Pro_Mono-STYLE.ttf')
   end
 
@@ -25,4 +27,3 @@ class HorizontalText
     end
   end
 end
-
