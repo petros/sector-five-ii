@@ -6,7 +6,9 @@ class EndScene < Scene
   def initialize(enemies_destroyed)
     @enemies_destroyed = enemies_destroyed
     @bottom_message = "Press P to play again, or Q to quit."
-    @message_font = Gosu::Font.new(28)
+    @message_font = Gosu::Font.new(12, name: 'C64_Pro_Mono-STYLE.ttf')
+    @bottom_message_width = @message_font.text_width(@bottom_message)
+    @bottom_message_x = (Game::WINDOW_WIDTH - @bottom_message_width) / 2
     @credits = []
     y = 700
     File.open('credits.txt').each do |line|
@@ -47,7 +49,7 @@ class EndScene < Scene
     @message_font.draw_text(@message, 40, 40, 1, 1, 1, Gosu::Color::FUCHSIA)
     @message_font.draw_text(@message2, 40, 75, 1, 1, 1, Gosu::Color::FUCHSIA)
     Gosu.draw_line(0, 500, Gosu::Color::RED, Game::WINDOW_WIDTH, 500, Gosu::Color::RED)
-    @message_font.draw_text(@bottom_message, 180, 540, 1, 1, 1, Gosu::Color::AQUA)
+    @message_font.draw_text(@bottom_message, @bottom_message_x, 540, 1, 1, 1, Gosu::Color::AQUA)
   end
 end
 
