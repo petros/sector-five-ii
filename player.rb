@@ -53,4 +53,9 @@ class Player < Sprite
       @y = @window.height - @radius
     end
   end
+
+  def off_top?
+    y < radius
+  end
 end
+

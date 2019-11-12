@@ -26,10 +26,10 @@ class FirstWaveScene < Scene
   end
 
   def button_down(id)
-    if id == Gosu::KbSpace
-      @bullets.push Bullet.new(Game.window, @player.x, @player.y, @player.angle)
-      @shooting_sound.play(0.3)
-    end
+    return unless id == Gosu::KbSpace
+
+    @bullets.push Bullet.new(Game.window, @player.x, @player.y, @player.angle)
+    @shooting_sound.play(0.3)
   end
 
   def update
@@ -90,29 +90,18 @@ class FirstWaveScene < Scene
       Game.current_scene = EndCountReachedScene.new(@enemies_destroyed)
     end
     @enemies.each do |enemy|
-      #distance = Gosu.distance(enemy.x, enemy.y, @player.x, @player.y)
-      #if distance < @player.radius + enemy.radius
       if enemy.collides_with?(@player)
         Game.current_scene = EndHitByEnemyScene.new(@enemies_destroyed)
       end
     end
-    if @player.y < @player.radius
-      Game.current_scene = EndOffTopScene.new(@enemies_destroyed)
-    end
+    Game.current_scene = EndOffTopScene.new(@enemies_destroyed) if @player.off_top?
   end
 
   def draw
     @player.draw
-    @enemies.each do |enemy|
-      enemy.draw
-    end
-    @bullets.each do |bullet|
-      bullet.draw
-    end
-    @explosions.each do |explosion|
-      explosion.draw
-    end
-
+    @enemies.each(&:draw)
+    @bullets.each(&:draw)
+    @explosions.each(&:draw)
     @ht.clear
     @ht.add("Fleet: #{Game::MAX_ENEMIES - @enemies_appeared}", Gosu::Color::WHITE)
     @ht.add("Destroyed: #{@enemies_destroyed}", Gosu::Color::GREEN)
@@ -120,4 +109,3 @@ class FirstWaveScene < Scene
     @ht.draw
   end
 end
-
