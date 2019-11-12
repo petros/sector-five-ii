@@ -6,6 +6,7 @@ require_relative 'enemy'
 require_relative 'bullet'
 require_relative 'explosion'
 require_relative 'end_scenes'
+require_relative 'horizontal_text'
 
 class FirstWaveScene < Scene
   def initialize
@@ -15,7 +16,7 @@ class FirstWaveScene < Scene
     @bullets = []
     @explosions = []
     @enemies_appeared = 0
-    @font = Gosu::Font.new(12, bold: true, name: 'C64_Pro_Mono-STYLE.ttf')
+    @ht = HorizontalText.new(320, 10)
     @enemies_destroyed = 0
     @game_music = Gosu::Song.new('sounds/cephalopod.ogg')
     @game_music.play(true)
@@ -112,21 +113,11 @@ class FirstWaveScene < Scene
       explosion.draw
     end
 
-    fleet_text = "Fleet: #{Game::MAX_ENEMIES - @enemies_appeared}"
-    fleet_width = @font.text_width(fleet_text)
-    destroyed_text = "Destroyed: #{@enemies_destroyed}"
-    destroyed_width = @font.text_width(destroyed_text)
-    escaped_text = "Escaped: #{Game::MAX_ENEMIES - @enemies_destroyed}"
-    escaped_width = @font.text_width(escaped_text)
-
-    score_base = 320
-    fleet_x = score_base
-    destroyed_x = fleet_x + fleet_width + 20
-    escaped_x = destroyed_x + destroyed_width + 20
-
-    @font.draw_text(fleet_text, fleet_x, 10, 1, 1, 1, Gosu::Color::WHITE)
-    @font.draw_text(destroyed_text, destroyed_x, 10, 1, 1, 1, Gosu::Color::GREEN)
-    @font.draw_text(escaped_text, escaped_x, 10, 1, 1, 1, Gosu::Color::RED)
+    @ht.clear
+    @ht.add("Fleet: #{Game::MAX_ENEMIES - @enemies_appeared}", Gosu::Color::WHITE)
+    @ht.add("Destroyed: #{@enemies_destroyed}", Gosu::Color::GREEN)
+    @ht.add("Escaped: #{Game::MAX_ENEMIES - @enemies_destroyed}", Gosu::Color::RED)
+    @ht.draw
   end
-
 end
+
