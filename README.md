@@ -39,6 +39,12 @@ with Ruby by [Mark Sobkowicz](https://twitter.com/MarkSobkowicz).
 You can read the rest of the [credits](credits.txt) seperately. It includes the
 attributions for the sounds and images used in this game.
 
+Font
+====
+We are using C64 Pro Mono which you can find here:  
+https://style64.org/c64-truetype  
+License: https://style64.org/c64-truetype/license  
+
 Contributing
 ============
 

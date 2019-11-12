@@ -27,3 +27,9 @@ http://creativecommons.org/licenses/by-sa/3.0/
 
 Sound effects from freesound.org
 Licensed under Creative Commons: Public Domain CCO
+
+---Font---
+
+C64 Pro Mono
+https://style64.org/c64-truetype
+License: https://style64.org/c64-truetype/license
