@@ -15,10 +15,10 @@ class FirstWaveScene < Scene
     @bullets = []
     @explosions = []
     @enemies_appeared = 0
-    @enemies_appeared_font = Gosu::Font.new(18, bold: true)
+    @enemies_appeared_font = Gosu::Font.new(12, bold: true, name: 'C64_Pro_Mono-STYLE.ttf')
     @enemies_destroyed = 0
-    @enemies_destroyed_font = Gosu::Font.new(18, bold: true)
-    @enemies_escaped_font = Gosu::Font.new(18, bold: true)
+    @enemies_destroyed_font = Gosu::Font.new(12, bold: true, name: 'C64_Pro_Mono-STYLE.ttf')
+    @enemies_escaped_font = Gosu::Font.new(12, bold: true, name: 'C64_Pro_Mono-STYLE.ttf')
     @game_music = Gosu::Song.new('sounds/cephalopod.ogg')
     @game_music.play(true)
     @explosion_sound = Gosu::Sample.new('sounds/explosion.ogg')
@@ -113,33 +113,25 @@ class FirstWaveScene < Scene
     @explosions.each do |explosion|
       explosion.draw
     end
-    @enemies_appeared_font.draw_text(
-      "Fleet: #{Game::MAX_ENEMIES - @enemies_appeared}",
-      460,
-      10,
-      1,
-      1,
-      1,
-      Gosu::Color::WHITE
-    )
-    @enemies_destroyed_font.draw_text(
-      "Destroyed: #{@enemies_destroyed}",
-      540,
-      10,
-      1,
-      1,
-      1,
-      Gosu::Color::GREEN
-    )
-    @enemies_escaped_font.draw_text(
-      "Escaped: #{Game::MAX_ENEMIES - @enemies_destroyed}",
-      660,
-      10,
-      1,
-      1,
-      1,
-      Gosu::Color::RED
-    )
+
+    fleet_text = "Fleet: #{Game::MAX_ENEMIES - @enemies_appeared}"
+    fleet_width = @enemies_appeared_font.text_width(fleet_text)
+    destroyed_text = "Destroyed: #{@enemies_destroyed}"
+    destroyed_width = @enemies_appeared_font.text_width(destroyed_text)
+    escaped_text = "Escaped: #{Game::MAX_ENEMIES - @enemies_destroyed}"
+    escaped_width = @enemies_appeared_font.text_width(escaped_text)
+
+    score_base = 320
+    fleet_x = score_base
+    destroyed_x = fleet_x + fleet_width + 20
+    escaped_x = destroyed_x + destroyed_width + 20
+
+    @enemies_appeared_font.draw_text(fleet_text, fleet_x, 10, 1, 1, 1,
+      Gosu::Color::WHITE)
+    @enemies_destroyed_font.draw_text(destroyed_text, destroyed_x, 10, 1, 1, 1,
+      Gosu::Color::GREEN)
+    @enemies_escaped_font.draw_text(escaped_text, escaped_x, 10, 1, 1, 1,
+      Gosu::Color::RED)
   end
 
 end

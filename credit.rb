@@ -6,7 +6,7 @@ class Credit
     @x = x
     @y = @initial_y = y
     @text = text
-    @font = Gosu::Font.new(24)
+    @font = Gosu::Font.new(10, name: 'C64_Pro_Mono-STYLE.ttf')
   end
 
   def move
