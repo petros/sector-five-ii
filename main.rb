@@ -1,10 +1,9 @@
-################################################################################
-#
-# Sector Five II
-#
+# frozen_string_literal: true
+
 require 'gosu'
 require_relative 'game'
 
+# Sector Five II
 class SectorFive < Gosu::Window
   def initialize
     super(Game::WINDOW_WIDTH, Game::WINDOW_HEIGHT)

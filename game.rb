@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require_relative 'start_scene'
 
+# Game
 class Game
   WINDOW_WIDTH = 800
   WINDOW_HEIGHT = 600
@@ -7,7 +10,7 @@ class Game
   MAX_ENEMIES = 100
 
   class << self
-     attr_accessor :current_scene, :window
+    attr_accessor :current_scene, :window
   end
 
   def initialize(window)

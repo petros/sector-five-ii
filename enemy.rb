@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require_relative 'sprite'
 
+# Enemy
 class Enemy < Sprite
   def initialize(window)
     @radius = 20

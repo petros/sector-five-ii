@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 require_relative 'sprite'
 
+# Explosion
 class Explosion < Sprite
   attr_reader :finished
 
-  def initialize(window, x, y)
-    @x = x
-    @y = y
+  def initialize(x_pos, y_pos)
+    @x = x_pos
+    @y = y_pos
     @radius = 30
     @images = Gosu::Image.load_tiles('images/explosions.png', 60, 60)
     @image_index = 0
