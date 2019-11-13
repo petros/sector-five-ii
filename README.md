@@ -51,7 +51,7 @@ License: https://style64.org/c64-truetype/license
 Contributing
 ============
 
-Please follow the [CONTRIBUTING](CONTRIBUTING) guide.
+Please follow the [CONTRIBUTING](CONTRIBUTING.md) guide.
 
 Contributors
 ============
