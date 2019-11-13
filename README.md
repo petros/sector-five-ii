@@ -6,6 +6,8 @@ Extended edition of the game, based on a tutorial from
 
 You can read the [credits](credits.txt) seperately.
 
+<img width="868" alt="20191113-sector-five-ii" src="https://user-images.githubusercontent.com/28818/68735166-78c44600-05e5-11ea-9292-da6931007e3a.png">
+
 Installation
 ============
 
