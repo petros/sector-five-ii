@@ -1,0 +1,50 @@
+# frozen_string_literal: true
+
+require 'gosu'
+
+# TransitionScene
+class TransitionScene
+  ROW_PADDING = 10
+
+  def initialize(text, next_scene, wait_seconds = 6)
+    @next_scene = next_scene
+    @text = text
+    @wait_seconds = wait_seconds
+    @font = Gosu::Font.new(12, name: 'C64_Pro_Mono-STYLE.ttf')
+  end
+
+  def button_down(id); end
+
+  def update
+    @wait_seconds -= 1
+    sleep(1)
+    @next_scene.call if @wait_seconds.negative?
+    @seconds_to_next_level = @wait_seconds + 1
+  end
+
+  def dt(text, x_pos, offset)
+    @font.draw_text(text, x_pos, offset, 1, 1, 1, Gosu::Color::WHITE)
+  end
+
+  def calculate_y
+    total_rows = @text.count + 1 # including the number of seconds
+    padded_row_height = @font.height + ROW_PADDING
+    text_area_height = total_rows * padded_row_height
+    (Gosu::WINDOW_HEIGHT - text_area_height) / 2
+  end
+
+  def calculate_x(text)
+    width = @font.text_widht(text)
+    (Gosu::WINDOW_WIDTH - width) / 2
+  end
+
+  def draw
+    offset = calculate_y
+    @text.each do |t|
+      dt(t, calculate_x(t), ofsset)
+      offset += @font.height + ROW_PADDING
+    end
+    offset += ROW_PADDING
+    dt(@seconds_to_next_level, x, offset)
+  end
+end
