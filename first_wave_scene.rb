@@ -16,12 +16,9 @@ class FirstWaveScene < Scene
   def initialize
     @scene = :first_wave
     @player = Player.new(Game.window)
-    @enemies = []
-    @bullets = []
-    @explosions = []
-    @enemies_appeared = 0
+    init_counters
+    init_arrays
     @ht = HorizontalText.new(320, 10)
-    @enemies_destroyed = 0
     initialize_sounds
   end
 
@@ -64,6 +61,18 @@ class FirstWaveScene < Scene
   # rubocop:enable MethodLength
 
   private
+
+  def init_arrays
+    @enemies = []
+    @bullets = []
+    @explosions = []
+  end
+
+  def init_counters
+    @enemies_appeared = 0
+    @enemies_escaped = 0
+    @enemies_destroyed = 0
+  end
 
   def move_player
     @player.turn_left if Gosu.button_down?(Gosu::KbLeft)
