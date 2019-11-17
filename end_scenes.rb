@@ -6,8 +6,8 @@ require_relative 'credit'
 
 # EndScene
 class EndScene < Scene
-  def initialize(enemies_destroyed)
-    @enemies_destroyed = enemies_destroyed
+  def initialize(remaining)
+    @enemies_destroyed = remaining
     @bottom_message = 'Press P to play again, or Q to quit.'
     @message_font = Gosu::Font.new(12, name: 'C64_Pro_Mono-STYLE.ttf')
     @bottom_message_width = @message_font.text_width(@bottom_message)
@@ -32,8 +32,9 @@ class EndScene < Scene
     Gosu.clip_to(50, 140, 700, 360) { @credits.each(&:draw) }
     Gosu.draw_line(0, 140, Gosu::Color::RED, Game::WINDOW_WIDTH, 140,
                    Gosu::Color::RED)
-    @message_font.draw_text(@message, 40, 40, 1, 1, 1, Gosu::Color::FUCHSIA)
-    @message_font.draw_text(@message2, 40, 75, 1, 1, 1, Gosu::Color::FUCHSIA)
+    @message_font.draw_text(@message, 40, 20, 1, 1, 1, Gosu::Color::FUCHSIA)
+    @message_font.draw_text(@message2, 40, 55, 1, 1, 1, Gosu::Color::FUCHSIA)
+    @message_font.draw_text(@message3, 40, 90, 1, 1, 1, Gosu::Color::FUCHSIA)
     Gosu.draw_line(0, 500, Gosu::Color::RED, Game::WINDOW_WIDTH, 500,
                    Gosu::Color::RED)
     @message_font.draw_text(@bottom_message, @bottom_message_x, 540, 1, 1, 1,
@@ -53,29 +54,28 @@ end
 
 # EndCountReachedScene
 class EndCountReachedScene < EndScene
-  def initialize(enemies_destroyed)
-    super(enemies_destroyed)
-    @message = "You made it! You destroyed #{enemies_destroyed} ships"
-    @message2 = "and #{Game::MAX_ENEMIES - enemies_destroyed} reached the base."
+  def initialize(remaining)
+    super(remaining)
+    @message = 'You made it! You destroyed all enemy ships!'
   end
 end
 
 # EndHitByEnemyScene
 class EndHitByEnemyScene < EndScene
-  def initialize(enemies_destroyed)
-    super(enemies_destroyed)
+  def initialize(remaining)
+    super(remaining)
     @message = 'You were struck by an enemy ship.'
     @message2 = 'Before your ship was destroyed, '
-    @message2 += "you took out #{enemies_destroyed} enemy ships."
+    @message3 = "there were #{remaining} remaining enemy ships."
   end
 end
 
 # EndOffTopScene
 class EndOffTopScene < EndScene
-  def initialize(enemies_destroyed)
-    super(enemies_destroyed)
+  def initialize(remaining)
+    super(remaining)
     @message = 'You got too close to the enemy mother ship.'
     @message2 = 'Before your ship was destroyed, '
-    @message2 += "you took out #{enemies_destroyed} enemy ships."
+    @message3 = "there were #{remaining} remaining enemy ships."
   end
 end
