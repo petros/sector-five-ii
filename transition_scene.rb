@@ -30,21 +30,22 @@ class TransitionScene
     total_rows = @text.count + 1 # including the number of seconds
     padded_row_height = @font.height + ROW_PADDING
     text_area_height = total_rows * padded_row_height
-    (Gosu::WINDOW_HEIGHT - text_area_height) / 2
+    (Game::WINDOW_HEIGHT - text_area_height) / 2
   end
 
   def calculate_x(text)
-    width = @font.text_widht(text)
-    (Gosu::WINDOW_WIDTH - width) / 2
+    width = @font.text_width(text)
+    (Game::WINDOW_WIDTH - width) / 2
   end
 
   def draw
     offset = calculate_y
     @text.each do |t|
-      dt(t, calculate_x(t), ofsset)
+      dt(t, calculate_x(t), offset)
       offset += @font.height + ROW_PADDING
     end
     offset += ROW_PADDING
+    x = calculate_x(@seconds_to_next_level)
     dt(@seconds_to_next_level, x, offset)
   end
 end
