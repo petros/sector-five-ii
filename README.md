@@ -29,9 +29,11 @@ Running or developing on macOS
 Running or developing on Windows
 ================================
 
-[...Help Needed...]
-Need someone with Windows to contribute this bit. They need to be able to run
-this game on their system.
+1. Download `Ruby+Devkit 2.4.9-1` from https://rubyinstaller.org/
+2. Install and follow the prompts to add Ruby to your PATH, associate .rb.rbw files, and install the development tools
+3. Open Command Prompt and run the following commands
+4. `gem install gosu`
+5. `gem install chipmunk`
 
 Credits
 =======
