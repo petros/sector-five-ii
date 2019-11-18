@@ -166,9 +166,9 @@ class FirstWaveScene < Scene
   def inform_player
     text = []
     text << 'You made it this round!'
-    text << "You have destroyed #{@enemies_destroyed}"
+    text << "You have destroyed #{@enemies_destroyed} enemies so far."
     remaining = @enemies_escaped
-    text << "Prepare to destroy the remaining #{remaining} enemy ships"
+    text << "Prepare to destroy the remaining #{remaining} enemy ships."
     next_scene =
       proc { Game.current_scene = FirstWaveScene.new(remaining) }
     Game.current_scene = TransitionScene.new(text, next_scene)
