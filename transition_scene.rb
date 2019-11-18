@@ -4,13 +4,15 @@ require 'gosu'
 
 # TransitionScene
 class TransitionScene
-  ROW_PADDING = 10
+  ROW_PADDING = 20
 
-  def initialize(text, next_scene, wait_seconds = 6)
+  def initialize(text, next_scene, wait_seconds: 6,
+                 font_size: 12, font_color: Gosu::Color::WHITE)
     @next_scene = next_scene
     @text = text
     @wait_seconds = wait_seconds
-    @font = Gosu::Font.new(12, name: 'C64_Pro_Mono-STYLE.ttf')
+    @font_color = font_color
+    @font = Gosu::Font.new(font_size, name: 'C64_Pro_Mono-STYLE.ttf')
   end
 
   def button_down(id); end
@@ -23,7 +25,7 @@ class TransitionScene
   end
 
   def dt(text, x_pos, offset)
-    @font.draw_text(text, x_pos, offset, 1, 1, 1, Gosu::Color::WHITE)
+    @font.draw_text(text, x_pos, offset, 1, 1, 1, @font_color)
   end
 
   def calculate_y

@@ -171,7 +171,7 @@ class FirstWaveScene < Scene
     text << "Prepare to destroy the remaining #{remaining} enemy ships."
     next_scene =
       proc { Game.current_scene = FirstWaveScene.new(remaining) }
-    Game.current_scene = TransitionScene.new(text, next_scene)
+    Game.current_scene = TransitionScene.new(text, next_scene, font_size: 14)
   end
 
   def detect_enemy_wave_finished
