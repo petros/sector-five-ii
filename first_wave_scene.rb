@@ -9,19 +9,17 @@ require_relative 'bullet'
 require_relative 'explosion'
 require_relative 'end_scenes'
 require_relative 'horizontal_text'
+require_relative 'transition_scene'
 
 # FirstWaveScene
-# rubocop:disable ClassLength
 class FirstWaveScene < Scene
-  def initialize
+  def initialize(enemy_count = 100)
+    @enemy_count = enemy_count
     @scene = :first_wave
     @player = Player.new(Game.window)
-    @enemies = []
-    @bullets = []
-    @explosions = []
-    @enemies_appeared = 0
+    init_counters
+    init_arrays
     @ht = HorizontalText.new(320, 10)
-    @enemies_destroyed = 0
     initialize_sounds
   end
 
@@ -32,7 +30,6 @@ class FirstWaveScene < Scene
     @shooting_sound.play(0.3)
   end
 
-  # rubocop:disable MethodLength
   def update
     move_player
     add_enemy
@@ -54,16 +51,26 @@ class FirstWaveScene < Scene
     @bullets.each(&:draw)
     @explosions.each(&:draw)
     @ht.clear
-    @ht.add("Fleet: #{Game::MAX_ENEMIES - @enemies_appeared}",
-            Gosu::Color::WHITE)
+    fleet = @enemy_count - @enemies_appeared
+    @ht.add("Fleet: #{fleet}", Gosu::Color::WHITE)
     @ht.add("Destroyed: #{@enemies_destroyed}", Gosu::Color::GREEN)
-    @ht.add("Escaped: #{Game::MAX_ENEMIES - @enemies_destroyed}",
-            Gosu::Color::RED)
+    @ht.add("Escaped: #{@enemies_escaped}", Gosu::Color::RED)
     @ht.draw
   end
-  # rubocop:enable MethodLength
 
   private
+
+  def init_arrays
+    @enemies = []
+    @bullets = []
+    @explosions = []
+  end
+
+  def init_counters
+    @enemies_appeared = 0
+    @enemies_escaped = 0
+    @enemies_destroyed = 0
+  end
 
   def move_player
     @player.turn_left if Gosu.button_down?(Gosu::KbLeft)
@@ -81,6 +88,7 @@ class FirstWaveScene < Scene
   end
 
   def add_enemy
+    return unless @enemies_appeared < @enemy_count
     return unless rand < Game::ENEMY_FREQUENCY
 
     @enemies.push Enemy.new(Game.window)
@@ -122,10 +130,11 @@ class FirstWaveScene < Scene
 
   def remove_escaped_enemies
     @enemies.dup.each do |enemy|
-      if enemy.y > Game::WINDOW_HEIGHT + enemy.radius
-        @enemies.delete enemy
-        @teleport_sound.play(0.3)
-      end
+      next unless enemy.y > Game::WINDOW_HEIGHT + enemy.radius
+
+      @enemies.delete enemy
+      @enemies_escaped += 1
+      @teleport_sound.play(0.3)
     end
   end
 
@@ -138,7 +147,8 @@ class FirstWaveScene < Scene
   def detect_player_hit_by_enemy
     @enemies.each do |enemy|
       if enemy.collides_with?(@player)
-        Game.current_scene = EndHitByEnemyScene.new(@enemies_destroyed)
+        remaining = @enemy_count - @enemies_destroyed
+        Game.current_scene = EndHitByEnemyScene.new(remaining)
       end
     end
   end
@@ -146,13 +156,35 @@ class FirstWaveScene < Scene
   def detect_player_off_top
     return unless @player.off_top?
 
-    Game.current_scene = EndOffTopScene.new(@enemies_destroyed)
+    remaining = @enemy_count - @enemies_destroyed
+    Game.current_scene = EndOffTopScene.new(remaining)
+  end
+
+  def inform_player
+    text = []
+    text << 'You made it this round!'
+    text << "You have destroyed #{@enemies_destroyed} enemies so far."
+    remaining = @enemies_escaped
+    text << "Prepare to destroy the remaining #{remaining} enemy ships."
+    next_scene =
+      proc { Game.current_scene = FirstWaveScene.new(remaining) }
+    Game.current_scene = TransitionScene.new(
+      text,
+      next_scene,
+      font_size: 14,
+      enable_keyboard_space: true
+    )
   end
 
   def detect_enemy_wave_finished
-    return unless @enemies_appeared > Game::MAX_ENEMIES
+    total = @enemies_escaped + @enemies_destroyed
+    return unless total == @enemy_count
 
-    Game.current_scene = EndCountReachedScene.new(@enemies_destroyed)
+    remaining = @enemies_escaped
+    if remaining.zero?
+      Game.current_scene = EndCountReachedScene.new
+    else
+      inform_player
+    end
   end
 end
-# rubocop:enable ClassLength
