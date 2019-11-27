@@ -12,7 +12,6 @@ require_relative 'horizontal_text'
 require_relative 'transition_scene'
 
 # FirstWaveScene
-# rubocop:disable ClassLength
 class FirstWaveScene < Scene
   def initialize(enemy_count = 100)
     @enemy_count = enemy_count
@@ -31,7 +30,6 @@ class FirstWaveScene < Scene
     @shooting_sound.play(0.3)
   end
 
-  # rubocop:disable MethodLength
   def update
     move_player
     add_enemy
@@ -59,7 +57,6 @@ class FirstWaveScene < Scene
     @ht.add("Escaped: #{@enemies_escaped}", Gosu::Color::RED)
     @ht.draw
   end
-  # rubocop:enable MethodLength
 
   private
 
@@ -171,7 +168,12 @@ class FirstWaveScene < Scene
     text << "Prepare to destroy the remaining #{remaining} enemy ships."
     next_scene =
       proc { Game.current_scene = FirstWaveScene.new(remaining) }
-    Game.current_scene = TransitionScene.new(text, next_scene, font_size: 14)
+    Game.current_scene = TransitionScene.new(
+      text,
+      next_scene,
+      font_size: 14,
+      enable_keyboard_space: true
+    )
   end
 
   def detect_enemy_wave_finished
@@ -186,4 +188,3 @@ class FirstWaveScene < Scene
     end
   end
 end
-# rubocop:enable ClassLength

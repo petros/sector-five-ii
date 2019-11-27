@@ -7,15 +7,21 @@ class TransitionScene
   ROW_PADDING = 20
 
   def initialize(text, next_scene, wait_seconds: 6,
-                 font_size: 12, font_color: Gosu::Color::WHITE)
+                 font_size: 12, font_color: Gosu::Color::WHITE,
+                 enable_keyboard_space: false)
     @next_scene = next_scene
     @text = text
     @wait_seconds = wait_seconds
     @font_color = font_color
     @font = Gosu::Font.new(font_size, name: 'C64_Pro_Mono-STYLE.ttf')
+    @enable_keyboard_space = enable_keyboard_space
   end
 
-  def button_down(id); end
+  def button_down(id)
+    return unless id == Gosu::KbSpace && @enable_keyboard_space
+
+    @next_scene.call
+  end
 
   def update
     @wait_seconds -= 1
@@ -49,5 +55,11 @@ class TransitionScene
     offset += ROW_PADDING
     x = calculate_x(@seconds_to_next_level)
     dt(@seconds_to_next_level, x, offset)
+    return unless @enable_keyboard_space
+
+    offset += ROW_PADDING * 4
+    msg = 'Press space to continue'
+    x = calculate_x(msg)
+    dt(msg, x, offset)
   end
 end
