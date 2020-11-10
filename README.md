@@ -21,10 +21,9 @@ Windows one as well.
 Running or developing on macOS
 ==============================
 
-1. Install the latest Ruby version
+1. Install the Ruby version specified in `.ruby-version`
 2. `brew install sdl2 libogg libvorbis`
-3. `gem install gosu`
-4. `gem install chipmunk`
+3. `bundle`
 
 Running or developing on Windows
 ================================
